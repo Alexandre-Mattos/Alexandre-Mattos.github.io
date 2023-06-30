@@ -5,12 +5,12 @@ from flask import Flask, redirect, render_template, request
 app = Flask(__name__, template_folder='templates')
 url_mapping = {}
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
 
 
-@app.route('/encurtar', methods=['GET', 'POST'])
+@app.route('/encurtar', methods=['POST'])
 def encurtar():
     if request.method == 'POST':
         original_url = request.form['url']
@@ -20,9 +20,8 @@ def encurtar():
     else:
         return redirect('/')
 
-@app.route('/<short_url>')
+@app.route('/<short_url>', methods=['GET'])
 def redirecionar(short_url):
-
     if short_url in url_mapping:
         original_url = url_mapping[short_url]
         return redirect(original_url)
