@@ -20,11 +20,8 @@ def encurtar():
     else:
         return redirect('/')
 
-
 @app.route('/<short_url>')
 def redirecionar(short_url):
-    print(short_url)
-    print(url_mapping)
 
     if short_url in url_mapping:
         original_url = url_mapping[short_url]
